@@ -1,8 +1,9 @@
 class GameEngine {
-  constructor(canvas, setGameState) {
+  constructor(canvas, setGameState, onGameEnd = null) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.setGameState = setGameState;
+    this.onGameEnd = onGameEnd;
     
     // Game state
     this.running = false;
