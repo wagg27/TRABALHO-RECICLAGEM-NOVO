@@ -251,8 +251,11 @@ class GameEngine {
     this.maxHeightReached = Math.max(this.maxHeightReached, this.currentHeight);
 
     // Check win condition
-    if (this.checkRecyclingSymbolCollision()) {
+    if (this.checkRecyclingSymbolCollision() && !this.gameWon) {
       this.gameWon = true;
+      if (this.onGameEnd) {
+        this.onGameEnd(this.currentHeight, true);
+      }
     }
 
     // Update game state
