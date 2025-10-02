@@ -10,6 +10,7 @@ const GameScreen = () => {
   const canvasRef = useRef(null);
   const gameEngineRef = useRef(null);
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [gameState, setGameState] = useState({
     height: 0,
     maxHeight: 0,
@@ -17,6 +18,11 @@ const GameScreen = () => {
     chargeLevel: 0,
     gameWon: false
   });
+  const [sessionId, setSessionId] = useState(null);
+  const [playerName, setPlayerName] = useState('Jogador Anônimo');
+  const [gameStartTime, setGameStartTime] = useState(null);
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   // Initialize game engine
   useEffect(() => {
