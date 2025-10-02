@@ -200,17 +200,31 @@ class GameEngine {
       );
     }
 
+    // Handle horizontal movement
+    const currentMoveSpeed = this.player.onGround ? this.moveSpeed : this.airMoveSpeed;
+    
+    if (this.player.movingLeft) {
+      this.player.velocityX = Math.max(this.player.velocityX - 0.5, -currentMoveSpeed);
+    }
+    if (this.player.movingRight) {
+      this.player.velocityX = Math.min(this.player.velocityX + 0.5, currentMoveSpeed);
+    }
+    
+    // Apply friction when not moving
+    if (!this.player.movingLeft && !this.player.movingRight && this.player.onGround) {
+      this.player.velocityX *= 0.8;
+    }
+
     // Apply physics
     if (!this.player.onGround) {
       this.player.velocityY += this.gravity;
+      // Air resistance for bag-like floating
+      this.player.velocityX *= 0.99;
     }
 
     // Update position
     this.player.x += this.player.velocityX;
     this.player.y += this.player.velocityY;
-
-    // Apply air resistance (bag-like floating)
-    this.player.velocityX *= 0.98;
 
     // Check platform collisions
     this.checkPlatformCollisions();
