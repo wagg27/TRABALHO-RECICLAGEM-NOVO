@@ -146,6 +146,9 @@ async def update_game_session(session_id: str, update_data: GameSessionUpdate):
         
         return {"success": True}
         
+    except HTTPException:
+        # Re-raise HTTPExceptions as-is
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
