@@ -28,6 +28,9 @@ async def root():
 # Import and include game routes
 from game_routes import game_router
 
+# Include the API router with health check
+app.include_router(api_router, tags=["health"])
+
 # Include the game router
 app.include_router(game_router, tags=["game"])
 
