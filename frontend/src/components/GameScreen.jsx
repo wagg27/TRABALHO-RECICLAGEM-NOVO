@@ -249,25 +249,55 @@ const GameScreen = () => {
 
         {/* Win Screen */}
         {gameState.gameWon && (
-          <div className="absolute inset-0 bg-black/80 flex items-center justify-center">
-            <div className="bg-slate-800 rounded-xl p-8 border border-emerald-500 text-center">
-              <h2 className="text-4xl font-bold text-emerald-400 mb-4">Victory!</h2>
-              <p className="text-slate-300 mb-6">
-                You've reached the recycling symbol! The plastic bag has found redemption.
+          <div className="absolute inset-0 bg-black/80 flex items-center justify-center p-4">
+            <div className="bg-slate-800 rounded-xl p-6 border border-emerald-500 text-center max-w-md w-full">
+              <h2 className="text-4xl font-bold text-emerald-400 mb-4">Vitória!</h2>
+              <p className="text-slate-300 mb-4">
+                Você alcançou o símbolo da reciclagem! A sacola plástica encontrou sua redenção.
               </p>
-              <div className="flex gap-4 justify-center">
+              
+              <div className="bg-slate-700 rounded-lg p-4 mb-6">
+                <h3 className="text-xl font-bold text-slate-200 mb-2">Seus Resultados</h3>
+                <p className="text-emerald-400">Altura: {gameState.height}m</p>
+                {gameStartTime && (
+                  <p className="text-blue-400">
+                    Tempo: {Math.floor((Date.now() - gameStartTime) / 1000)}s
+                  </p>
+                )}
+              </div>
+
+              {showLeaderboard && leaderboard.length > 0 && (
+                <div className="bg-slate-700 rounded-lg p-4 mb-6">
+                  <h3 className="text-lg font-bold text-slate-200 mb-3 flex items-center gap-2">
+                    <TrophyIcon className="w-5 h-5 text-yellow-500" />
+                    Ranking
+                  </h3>
+                  <div className="space-y-2 max-h-32 overflow-y-auto">
+                    {leaderboard.slice(0, 5).map((entry, index) => (
+                      <div key={entry.id} className="flex justify-between text-sm">
+                        <span className={`${entry.name === playerName ? 'text-emerald-400 font-bold' : 'text-slate-300'}`}>
+                          {index + 1}. {entry.name}
+                        </span>
+                        <span className="text-slate-400">{entry.height}m</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex gap-3 justify-center">
                 <Button
                   onClick={resetGame}
                   className="bg-emerald-600 hover:bg-emerald-500"
                 >
-                  Play Again
+                  Jogar Novamente
                 </Button>
                 <Button
                   onClick={() => navigate('/')}
                   variant="outline"
                   className="border-slate-600 text-slate-300 hover:bg-slate-700"
                 >
-                  Main Menu
+                  Menu Principal
                 </Button>
               </div>
             </div>
