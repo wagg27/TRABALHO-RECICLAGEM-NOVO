@@ -24,12 +24,24 @@ const GameScreen = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
 
-  // Initialize game engine
+  // Initialize game engine and session
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    gameEngineRef.current = new GameEngine(canvas, setGameState);
+    // Start game session
+    const initSession = async () => {
+      try {
+        const session = await GameAPI.startSession(playerName);
+        setSessionId(session.session_id);
+        setGameStartTime(Date.now());
+      } catch (error) {
+        console.error('Failed to start session:', error);
+      }
+    };
+
+    initSession();
+    gameEngineRef.current = new GameEngine(canvas, setGameState, handleGameEnd);
     gameEngineRef.current.start();
 
     return () => {
@@ -38,6 +50,45 @@ const GameScreen = () => {
       }
     };
   }, []);
+
+  // Handle game completion
+  const handleGameEnd = async (height, completed) => {
+    if (!sessionId || !gameStartTime) return;
+
+    try {
+      const playTime = Math.floor((Date.now() - gameStartTime) / 1000);
+      
+      // Save score
+      const scoreResult = await GameAPI.saveScore(
+        playerName, 
+        height, 
+        completed, 
+        completed ? playTime : null
+      );
+
+      // Update session
+      await GameAPI.updateSession(sessionId, height, completed, playTime);
+
+      // Show achievement toast if new record
+      if (scoreResult.new_record) {
+        toast({
+          title: "🏆 Novo Recorde!",
+          description: `Você alcançou ${height}m - sua melhor marca!`
+        });
+      }
+
+      // Load leaderboard
+      const leaderboardData = await GameAPI.getLeaderboard();
+      setLeaderboard(leaderboardData);
+
+      if (completed) {
+        setShowLeaderboard(true);
+      }
+
+    } catch (error) {
+      console.error('Error saving game results:', error);
+    }
+  };
 
   // Handle resize
   useEffect(() => {
