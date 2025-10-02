@@ -105,6 +105,12 @@ class GameEngine {
         e.preventDefault();
         this.startJump();
       }
+      if (e.code === 'KeyA' || e.code === 'ArrowLeft') {
+        this.player.movingLeft = true;
+      }
+      if (e.code === 'KeyD' || e.code === 'ArrowRight') {
+        this.player.movingRight = true;
+      }
     });
 
     window.addEventListener('keyup', (e) => {
@@ -113,7 +119,30 @@ class GameEngine {
         e.preventDefault();
         this.releaseJump();
       }
+      if (e.code === 'KeyA' || e.code === 'ArrowLeft') {
+        this.player.movingLeft = false;
+      }
+      if (e.code === 'KeyD' || e.code === 'ArrowRight') {
+        this.player.movingRight = false;
+      }
     });
+  }
+
+  // Methods for mobile controls
+  startMoveLeft() {
+    this.player.movingLeft = true;
+  }
+
+  stopMoveLeft() {
+    this.player.movingLeft = false;
+  }
+
+  startMoveRight() {
+    this.player.movingRight = true;
+  }
+
+  stopMoveRight() {
+    this.player.movingRight = false;
   }
 
   startJump() {
