@@ -105,8 +105,28 @@ const GameScreen = () => {
           </div>
         )}
 
-        {/* Mobile Jump Button */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 md:hidden">
+        {/* Mobile Controls */}
+        <div className="absolute bottom-4 left-0 right-0 flex justify-between px-4 md:hidden">
+          {/* Left Movement Button */}
+          <div
+            className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg border-4 border-blue-400 active:scale-95 transition-transform"
+            onTouchStart={(e) => {
+              e.preventDefault();
+              if (gameEngineRef.current) {
+                gameEngineRef.current.startMoveLeft();
+              }
+            }}
+            onTouchEnd={(e) => {
+              e.preventDefault();
+              if (gameEngineRef.current) {
+                gameEngineRef.current.stopMoveLeft();
+              }
+            }}
+          >
+            <span className="text-white font-bold text-lg">←</span>
+          </div>
+
+          {/* Jump Button */}
           <div
             className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg border-4 border-emerald-400 active:scale-95 transition-transform"
             onTouchStart={(e) => {
@@ -124,12 +144,38 @@ const GameScreen = () => {
           >
             <span className="text-white font-bold text-lg">JUMP</span>
           </div>
-          <p className="text-slate-400 text-xs text-center mt-2">Hold to charge</p>
+
+          {/* Right Movement Button */}
+          <div
+            className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg border-4 border-blue-400 active:scale-95 transition-transform"
+            onTouchStart={(e) => {
+              e.preventDefault();
+              if (gameEngineRef.current) {
+                gameEngineRef.current.startMoveRight();
+              }
+            }}
+            onTouchEnd={(e) => {
+              e.preventDefault();
+              if (gameEngineRef.current) {
+                gameEngineRef.current.stopMoveRight();
+              }
+            }}
+          >
+            <span className="text-white font-bold text-lg">→</span>
+          </div>
+        </div>
+
+        {/* Mobile Instructions */}
+        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 md:hidden">
+          <p className="text-slate-400 text-xs text-center">Hold buttons to move and charge jump</p>
         </div>
 
         {/* Desktop Instructions */}
         <div className="absolute top-4 left-4 bg-slate-800/90 rounded-lg px-3 py-2 border border-slate-600 hidden md:block">
-          <p className="text-slate-300 text-sm">Hold <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">SPACE</kbd> to charge jump</p>
+          <div className="text-slate-300 text-sm space-y-1">
+            <p>Movement: <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">A</kbd> <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">D</kbd> or Arrow Keys</p>
+            <p>Jump: Hold <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">SPACE</kbd> to charge</p>
+          </div>
         </div>
 
         {/* Win Screen */}
