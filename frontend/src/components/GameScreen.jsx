@@ -102,11 +102,21 @@ const GameScreen = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const resetGame = useCallback(() => {
+  const resetGame = useCallback(async () => {
     if (gameEngineRef.current) {
       gameEngineRef.current.reset();
     }
-  }, []);
+    
+    // Start new session
+    try {
+      const session = await GameAPI.startSession(playerName);
+      setSessionId(session.session_id);
+      setGameStartTime(Date.now());
+      setShowLeaderboard(false);
+    } catch (error) {
+      console.error('Failed to start new session:', error);
+    }
+  }, [playerName]);
 
   return (
     <div className="min-h-screen bg-slate-900 flex flex-col">
