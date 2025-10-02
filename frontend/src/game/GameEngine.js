@@ -19,7 +19,9 @@ class GameEngine {
       onGround: false,
       charging: false,
       chargeLevel: 0,
-      maxChargeLevel: 100
+      maxChargeLevel: 100,
+      movingLeft: false,
+      movingRight: false
     };
     
     // Physics constants
@@ -27,6 +29,8 @@ class GameEngine {
     this.jumpPowerMultiplier = 0.25;
     this.maxJumpPower = 20;
     this.chargeSpeed = 2;
+    this.moveSpeed = 4;
+    this.airMoveSpeed = 2;
     
     // Camera
     this.camera = { x: 0, y: 0 };
