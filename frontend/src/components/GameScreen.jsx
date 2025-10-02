@@ -1,8 +1,10 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
-import { HomeIcon, RotateCcwIcon } from 'lucide-react';
+import { HomeIcon, RotateCcwIcon, TrophyIcon } from 'lucide-react';
 import GameEngine from '../game/GameEngine';
+import GameAPI from '../services/api';
+import { useToast } from '../hooks/use-toast';
 
 const GameScreen = () => {
   const canvasRef = useRef(null);
