@@ -177,6 +177,8 @@ class GameEngine {
     this.player.onGround = true;
     this.player.charging = false;
     this.player.chargeLevel = 0;
+    this.player.movingLeft = false;
+    this.player.movingRight = false;
     this.gameWon = false;
   }
 
