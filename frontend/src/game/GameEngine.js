@@ -26,12 +26,14 @@ class GameEngine {
     };
     
     // Physics constants
-    this.gravity = 0.6;
-    this.jumpPowerMultiplier = 0.25;
-    this.maxJumpPower = 20;
-    this.chargeSpeed = 2;
-    this.moveSpeed = 4;
-    this.airMoveSpeed = 2;
+    this.gravity = 0.8;
+    this.jumpPowerMultiplier = 0.3;
+    this.maxJumpPower = 25;
+    this.chargeSpeed = 3;
+    this.moveSpeed = 6;
+    this.airMoveSpeed = 4;
+    this.acceleration = 1.2;
+    this.friction = 0.85;
     
     // Camera
     this.camera = { x: 0, y: 0 };
