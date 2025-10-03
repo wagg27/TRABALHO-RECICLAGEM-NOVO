@@ -204,7 +204,6 @@ const GameScreen = () => {
               }}
               onMouseDown={(e) => {
                 e.preventDefault();
-                console.log('Mouse down left');
                 if (gameEngineRef.current) {
                   gameEngineRef.current.startMoveLeft();
                 }
