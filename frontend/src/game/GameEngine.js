@@ -218,13 +218,28 @@ class GameEngine {
 
   releaseJump() {
     if (this.player.charging && this.player.onGround) {
-      const jumpPower = (this.player.chargeLevel / this.player.maxChargeLevel) * this.maxJumpPower;
+      const jumpPower = Math.max(8, (this.player.chargeLevel / this.player.maxChargeLevel) * this.maxJumpPower);
       
-      // Calculate jump angle (slightly random for bag-like movement)
-      const angle = -Math.PI/2 + (Math.random() * 0.4 - 0.2); // Mostly upward with slight variation
+      // More predictable jump angle with slight horizontal bias based on movement
+      let baseAngle = -Math.PI/2; // Straight up
+      let horizontalBias = 0;
       
-      this.player.velocityX = Math.cos(angle) * jumpPower * 0.7;
-      this.player.velocityY = Math.sin(angle) * jumpPower;
+      // Add horizontal component if moving
+      if (this.player.movingLeft) {
+        horizontalBias = -0.3;
+      } else if (this.player.movingRight) {
+        horizontalBias = 0.3;
+      }
+      
+      const angle = baseAngle + horizontalBias + (Math.random() * 0.2 - 0.1); // Less randomness
+      
+      // Preserve current horizontal momentum and add jump velocity
+      const jumpVelX = Math.cos(angle) * jumpPower * 0.6;
+      const jumpVelY = Math.sin(angle) * jumpPower;
+      
+      // Combine with existing horizontal velocity
+      this.player.velocityX = (this.player.velocityX * 0.5) + jumpVelX;
+      this.player.velocityY = jumpVelY;
       
       this.player.charging = false;
       this.player.chargeLevel = 0;
