@@ -354,17 +354,23 @@ class GameEngine {
     this.player.onGround = false;
 
     for (const platform of this.platforms) {
-      // Check if player is falling onto platform
+      // More reliable platform collision detection
       if (
-        this.player.velocityY > 0 &&
-        this.player.x + this.player.width > platform.x &&
-        this.player.x < platform.x + platform.width &&
+        this.player.velocityY >= 0 && // Only when falling or at rest
+        this.player.x + this.player.width > platform.x + 2 && // Small buffer for edge cases
+        this.player.x < platform.x + platform.width - 2 &&
         this.player.y + this.player.height > platform.y &&
-        this.player.y + this.player.height < platform.y + platform.height + 10
+        this.player.y + this.player.height <= platform.y + platform.height + Math.abs(this.player.velocityY) + 5
       ) {
+        // Snap to platform surface
         this.player.y = platform.y - this.player.height;
         this.player.velocityY = 0;
         this.player.onGround = true;
+        
+        // Apply platform friction to prevent sliding off edges
+        if (Math.abs(this.player.velocityX) < 0.5) {
+          this.player.velocityX = 0;
+        }
         break;
       }
     }
