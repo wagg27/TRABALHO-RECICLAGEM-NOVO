@@ -285,6 +285,7 @@ const GameScreen = () => {
               onTouchStart={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log('Touch start jump');
                 if (gameEngineRef.current) {
                   gameEngineRef.current.startJump();
                 }
@@ -292,18 +293,27 @@ const GameScreen = () => {
               onTouchEnd={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                console.log('Touch end jump');
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.releaseJump();
+                }
+              }}
+              onTouchCancel={(e) => {
+                e.preventDefault();
                 if (gameEngineRef.current) {
                   gameEngineRef.current.releaseJump();
                 }
               }}
               onMouseDown={(e) => {
                 e.preventDefault();
+                console.log('Mouse down jump');
                 if (gameEngineRef.current) {
                   gameEngineRef.current.startJump();
                 }
               }}
               onMouseUp={(e) => {
                 e.preventDefault();
+                console.log('Mouse up jump');
                 if (gameEngineRef.current) {
                   gameEngineRef.current.releaseJump();
                 }
