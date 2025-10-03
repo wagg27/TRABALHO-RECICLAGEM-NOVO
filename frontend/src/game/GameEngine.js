@@ -74,24 +74,72 @@ class GameEngine {
     const platformWidth = 120;
     const platformHeight = 20;
     
-    // Ground platform
+    // Ground platform (larger starting area)
     platforms.push({
-      x: this.worldWidth / 2 - platformWidth / 2,
+      x: this.worldWidth / 2 - (platformWidth * 1.5) / 2,
       y: this.worldHeight - 100,
-      width: platformWidth,
+      width: platformWidth * 1.5,
       height: platformHeight,
       type: 'ground'
     });
     
-    // Generate ascending platforms with gaps
-    for (let i = 1; i < 30; i++) {
+    // Generate ascending platforms with more strategic placement
+    let currentHeight = this.worldHeight - 200;
+    
+    // First section - easier jumps
+    for (let i = 0; i < 15; i++) {
       const x = Math.random() * (this.worldWidth - platformWidth);
-      const y = this.worldHeight - 200 - (i * 100) + (Math.random() * 40 - 20);
+      const y = currentHeight - (i * 80) + (Math.random() * 30 - 15);
       
       platforms.push({
         x: x,
         y: y,
         width: platformWidth,
+        height: platformHeight,
+        type: 'platform'
+      });
+    }
+    
+    // Second section - medium difficulty
+    currentHeight -= 15 * 80;
+    for (let i = 0; i < 25; i++) {
+      const x = Math.random() * (this.worldWidth - platformWidth);
+      const y = currentHeight - (i * 100) + (Math.random() * 50 - 25);
+      
+      platforms.push({
+        x: x,
+        y: y,
+        width: platformWidth - 20, // Smaller platforms
+        height: platformHeight,
+        type: 'platform'
+      });
+    }
+    
+    // Third section - harder jumps
+    currentHeight -= 25 * 100;
+    for (let i = 0; i < 20; i++) {
+      const x = Math.random() * (this.worldWidth - platformWidth);
+      const y = currentHeight - (i * 120) + (Math.random() * 60 - 30);
+      
+      platforms.push({
+        x: x,
+        y: y,
+        width: platformWidth - 30, // Even smaller platforms
+        height: platformHeight,
+        type: 'platform'
+      });
+    }
+    
+    // Final section - expert level
+    currentHeight -= 20 * 120;
+    for (let i = 0; i < 15; i++) {
+      const x = Math.random() * (this.worldWidth - platformWidth);
+      const y = currentHeight - (i * 150) + (Math.random() * 80 - 40);
+      
+      platforms.push({
+        x: x,
+        y: y,
+        width: Math.max(60, platformWidth - 40), // Smallest platforms
         height: platformHeight,
         type: 'platform'
       });
