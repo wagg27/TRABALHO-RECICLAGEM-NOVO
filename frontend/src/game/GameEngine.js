@@ -186,6 +186,9 @@ class GameEngine {
       if (e.code === 'KeyD' || e.code === 'ArrowRight') {
         this.player.movingRight = false;
       }
+      if (e.code === 'KeyW') {
+        this.releaseJump();
+      }
     });
   }
 
