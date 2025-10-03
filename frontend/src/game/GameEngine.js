@@ -162,6 +162,16 @@ class GameEngine {
       if (e.code === 'KeyD' || e.code === 'ArrowRight') {
         this.player.movingRight = true;
       }
+      if (e.code === 'KeyW') {
+        // W also charges jump (alternative to space)
+        this.startJump();
+      }
+      if (e.code === 'KeyS') {
+        // S can be used for fast descent (small downward force when in air)
+        if (!this.player.onGround) {
+          this.player.velocityY += 2;
+        }
+      }
     });
 
     window.addEventListener('keyup', (e) => {
