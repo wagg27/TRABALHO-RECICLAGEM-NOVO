@@ -180,7 +180,8 @@ const GameScreen = () => {
           <div className="absolute bottom-0 left-4 flex flex-col gap-2">
             {/* Left Movement Button */}
             <div
-              className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg border-4 border-blue-400 active:scale-95 transition-transform select-none"
+              className="w-16 h-16 bg-blue-600 hover:bg-blue-500 rounded-full flex items-center justify-center shadow-lg border-4 border-blue-400 active:scale-95 active:bg-blue-700 transition-all select-none touch-manipulation"
+              style={{ touchAction: 'manipulation' }}
               onTouchStart={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
