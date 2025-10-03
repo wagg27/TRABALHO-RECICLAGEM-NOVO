@@ -185,7 +185,6 @@ const GameScreen = () => {
               onTouchStart={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Touch start left');
                 if (gameEngineRef.current) {
                   gameEngineRef.current.startMoveLeft();
                 }
