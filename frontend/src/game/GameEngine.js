@@ -194,18 +194,22 @@ class GameEngine {
 
   // Methods for mobile controls
   startMoveLeft() {
+    console.log('Start move left');
     this.player.movingLeft = true;
   }
 
   stopMoveLeft() {
+    console.log('Stop move left');
     this.player.movingLeft = false;
   }
 
   startMoveRight() {
+    console.log('Start move right');
     this.player.movingRight = true;
   }
 
   stopMoveRight() {
+    console.log('Stop move right');
     this.player.movingRight = false;
   }
 
