@@ -175,62 +175,124 @@ const GameScreen = () => {
         )}
 
         {/* Mobile Controls */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-between px-4 md:hidden">
-          {/* Left Movement Button */}
-          <div
-            className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg border-4 border-blue-400 active:scale-95 transition-transform"
-            onTouchStart={(e) => {
-              e.preventDefault();
-              if (gameEngineRef.current) {
-                gameEngineRef.current.startMoveLeft();
-              }
-            }}
-            onTouchEnd={(e) => {
-              e.preventDefault();
-              if (gameEngineRef.current) {
-                gameEngineRef.current.stopMoveLeft();
-              }
-            }}
-          >
-            <span className="text-white font-bold text-lg">←</span>
+        <div className="absolute bottom-4 left-0 right-0 md:hidden">
+          {/* Left Side - Movement Controls */}
+          <div className="absolute bottom-0 left-4 flex flex-col gap-2">
+            {/* Left Movement Button */}
+            <div
+              className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg border-4 border-blue-400 active:scale-95 transition-transform select-none"
+              onTouchStart={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.startMoveLeft();
+                }
+              }}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.stopMoveLeft();
+                }
+              }}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.startMoveLeft();
+                }
+              }}
+              onMouseUp={(e) => {
+                e.preventDefault();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.stopMoveLeft();
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.stopMoveLeft();
+                }
+              }}
+            >
+              <span className="text-white font-bold text-xl">←</span>
+            </div>
+            
+            {/* Right Movement Button */}
+            <div
+              className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg border-4 border-blue-400 active:scale-95 transition-transform select-none ml-20"
+              onTouchStart={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.startMoveRight();
+                }
+              }}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.stopMoveRight();
+                }
+              }}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.startMoveRight();
+                }
+              }}
+              onMouseUp={(e) => {
+                e.preventDefault();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.stopMoveRight();
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.stopMoveRight();
+                }
+              }}
+            >
+              <span className="text-white font-bold text-xl">→</span>
+            </div>
           </div>
 
-          {/* Jump Button */}
-          <div
-            className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg border-4 border-emerald-400 active:scale-95 transition-transform"
-            onTouchStart={(e) => {
-              e.preventDefault();
-              if (gameEngineRef.current) {
-                gameEngineRef.current.startJump();
-              }
-            }}
-            onTouchEnd={(e) => {
-              e.preventDefault();
-              if (gameEngineRef.current) {
-                gameEngineRef.current.releaseJump();
-              }
-            }}
-          >
-            <span className="text-white font-bold text-lg">JUMP</span>
-          </div>
-
-          {/* Right Movement Button */}
-          <div
-            className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-lg border-4 border-blue-400 active:scale-95 transition-transform"
-            onTouchStart={(e) => {
-              e.preventDefault();
-              if (gameEngineRef.current) {
-                gameEngineRef.current.startMoveRight();
-              }
-            }}
-            onTouchEnd={(e) => {
-              e.preventDefault();
-              if (gameEngineRef.current) {
-                gameEngineRef.current.stopMoveRight();
-              }
-            }}
-          >
-            <span className="text-white font-bold text-lg">→</span>
+          {/* Right Side - Jump Button */}
+          <div className="absolute bottom-0 right-4">
+            <div
+              className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg border-4 border-emerald-400 active:scale-95 transition-transform select-none"
+              onTouchStart={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.startJump();
+                }
+              }}
+              onTouchEnd={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.releaseJump();
+                }
+              }}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.startJump();
+                }
+              }}
+              onMouseUp={(e) => {
+                e.preventDefault();
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.releaseJump();
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (gameEngineRef.current) {
+                  gameEngineRef.current.releaseJump();
+                }
+              }}
+            >
+              <span className="text-white font-bold text-sm">PULO</span>
+            </div>
           </div>
         </div>
 
