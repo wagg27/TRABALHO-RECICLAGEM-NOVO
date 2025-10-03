@@ -236,7 +236,7 @@ const GameScreen = () => {
 
         {/* Mobile Instructions */}
         <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 md:hidden">
-          <p className="text-slate-400 text-xs text-center">Hold buttons to move and charge jump</p>
+          <p className="text-slate-400 text-xs text-center">Segure os botões para mover e carregar o pulo</p>
         </div>
 
         {/* Desktop Instructions */}
