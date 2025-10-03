@@ -266,19 +266,23 @@ class GameEngine {
       );
     }
 
-    // Handle horizontal movement
+    // Handle horizontal movement with better acceleration
     const currentMoveSpeed = this.player.onGround ? this.moveSpeed : this.airMoveSpeed;
     
     if (this.player.movingLeft) {
-      this.player.velocityX = Math.max(this.player.velocityX - 0.5, -currentMoveSpeed);
+      this.player.velocityX = Math.max(this.player.velocityX - this.acceleration, -currentMoveSpeed);
     }
     if (this.player.movingRight) {
-      this.player.velocityX = Math.min(this.player.velocityX + 0.5, currentMoveSpeed);
+      this.player.velocityX = Math.min(this.player.velocityX + this.acceleration, currentMoveSpeed);
     }
     
-    // Apply friction when not moving
-    if (!this.player.movingLeft && !this.player.movingRight && this.player.onGround) {
-      this.player.velocityX *= 0.8;
+    // Apply friction when not moving (improved stopping)
+    if (!this.player.movingLeft && !this.player.movingRight) {
+      if (this.player.onGround) {
+        this.player.velocityX *= this.friction;
+      } else {
+        this.player.velocityX *= 0.95; // Less friction in air
+      }
     }
 
     // Apply physics
