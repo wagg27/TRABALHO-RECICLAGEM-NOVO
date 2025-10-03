@@ -533,8 +533,8 @@ class GameEngine {
     this.ctx.strokeStyle = '#6b7280';
     this.ctx.strokeRect(this.canvas.width - 100, 20, 80, 200);
     
-    // Height progress
-    const progress = Math.min(this.currentHeight / 300, 1); // Assuming 300m is max height
+    // Height progress (adjusted for new tower height)
+    const progress = Math.min(this.currentHeight / 500, 1); // 500m is new max height
     this.ctx.fillStyle = '#10b981';
     this.ctx.fillRect(this.canvas.width - 90, 210 - (progress * 180), 60, progress * 180);
     
