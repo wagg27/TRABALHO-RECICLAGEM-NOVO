@@ -39,8 +39,8 @@ class GameEngine {
     this.camera = { x: 0, y: 0 };
     
     // World properties
-    this.worldWidth = 800;
-    this.worldHeight = 3000; // Tall tower
+    this.worldWidth = 1000;
+    this.worldHeight = 5000; // Much taller tower
     
     // Platforms (simplified level design)
     this.platforms = this.generatePlatforms();
