@@ -242,8 +242,9 @@ const GameScreen = () => {
         {/* Desktop Instructions */}
         <div className="absolute top-4 left-4 bg-slate-800/90 rounded-lg px-3 py-2 border border-slate-600 hidden md:block">
           <div className="text-slate-300 text-sm space-y-1">
-            <p>Movement: <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">A</kbd> <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">D</kbd> or Arrow Keys</p>
-            <p>Jump: Hold <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">SPACE</kbd> to charge</p>
+            <p>Movimento: <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">A</kbd> <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">D</kbd> ou Setas</p>
+            <p>Pulo: <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">ESPAÇO</kbd> ou <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">W</kbd></p>
+            <p>Descer: <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">S</kbd> (no ar)</p>
           </div>
         </div>
 
