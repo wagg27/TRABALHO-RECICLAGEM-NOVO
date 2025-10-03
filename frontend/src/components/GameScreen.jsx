@@ -260,7 +260,8 @@ const GameScreen = () => {
           {/* Right Side - Jump Button */}
           <div className="absolute bottom-0 right-4">
             <div
-              className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center shadow-lg border-4 border-emerald-400 active:scale-95 transition-transform select-none"
+              className="w-20 h-20 bg-emerald-600 hover:bg-emerald-500 rounded-full flex items-center justify-center shadow-lg border-4 border-emerald-400 active:scale-95 active:bg-emerald-700 transition-all select-none touch-manipulation"
+              style={{ touchAction: 'manipulation' }}
               onTouchStart={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
