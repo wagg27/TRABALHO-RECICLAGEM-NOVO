@@ -67,6 +67,12 @@ class GameEngine {
     
     // Initialize player position
     this.resetPlayerPosition();
+    
+    // Initialize screen shake
+    this.screenShake = 0;
+    
+    // Initialize particle system
+    this.pollutionParticles = this.generatePollutionParticles();
   }
 
   generatePlatforms() {
