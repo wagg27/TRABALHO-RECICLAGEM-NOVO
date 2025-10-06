@@ -121,34 +121,36 @@ const GameScreen = () => {
   return (
     <div className="min-h-screen bg-slate-900 flex flex-col">
       {/* Game Header */}
-      <div className="bg-slate-800 px-4 py-2 flex justify-between items-center border-b border-slate-700">
+      <div className="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 px-4 py-3 flex justify-between items-center border-b-2 border-emerald-500/30 shadow-lg">
         <div className="flex items-center gap-4">
           <Button
             variant="outline"
             size="sm"
             onClick={() => navigate('/')}
-            className="border-slate-600 text-slate-300 hover:bg-slate-700"
+            className="border-emerald-600/50 text-emerald-300 hover:bg-emerald-700/30 hover:border-emerald-500 transition-all"
           >
             <HomeIcon className="w-4 h-4 mr-1" />
-            Menu
+            Menu Principal
           </Button>
           <Button
             variant="outline"
             size="sm"
             onClick={resetGame}
-            className="border-slate-600 text-slate-300 hover:bg-slate-700"
+            className="border-amber-600/50 text-amber-300 hover:bg-amber-700/30 hover:border-amber-500 transition-all"
           >
             <RotateCcwIcon className="w-4 h-4 mr-1" />
-            Reset
+            Reiniciar
           </Button>
         </div>
         
         <div className="flex items-center gap-6 text-slate-300">
-          <div className="text-sm">
-            Height: <span className="text-emerald-400 font-mono">{gameState.height}m</span>
+          <div className="bg-slate-900/50 px-3 py-1 rounded-lg border border-emerald-600/30">
+            <span className="text-xs text-slate-400">Altura:</span>
+            <span className="text-emerald-400 font-bold text-lg ml-1">{gameState.height}m</span>
           </div>
-          <div className="text-sm">
-            Best: <span className="text-amber-400 font-mono">{gameState.maxHeight}m</span>
+          <div className="bg-slate-900/50 px-3 py-1 rounded-lg border border-amber-600/30">
+            <span className="text-xs text-slate-400">Recorde:</span>
+            <span className="text-amber-400 font-bold text-lg ml-1">{gameState.maxHeight}m</span>
           </div>
         </div>
       </div>
