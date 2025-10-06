@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
-import { RecycleIcon, PlayIcon } from 'lucide-react';
+import { RecycleIcon, PlayIcon, LeafIcon } from 'lucide-react';
 
 const MainMenu = () => {
   const navigate = useNavigate();
