@@ -71,17 +71,31 @@ const MainMenu = () => {
         </Card>
 
         {/* Start Button */}
-        <Button
-          onClick={() => navigate('/game')}
-          className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-8 py-4 text-xl font-bold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-        >
-          <PlayIcon className="w-6 h-6 mr-2" />
-          Begin Journey
-        </Button>
+        <div className="space-y-4">
+          <Button
+            onClick={() => navigate('/game')}
+            className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:via-teal-400 hover:to-cyan-400 text-white px-10 py-5 text-xl font-black rounded-2xl transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-emerald-500/25 border-2 border-emerald-400/20"
+          >
+            <PlayIcon className="w-7 h-7 mr-3" />
+            Iniciar Jornada
+          </Button>
+          
+          <div className="flex justify-center gap-4 text-xs">
+            <span className="px-3 py-1 bg-emerald-900/50 rounded-full text-emerald-300 border border-emerald-600/30">
+              🌱 Ecológico
+            </span>
+            <span className="px-3 py-1 bg-blue-900/50 rounded-full text-blue-300 border border-blue-600/30">
+              📱 Mobile Ready
+            </span>
+            <span className="px-3 py-1 bg-purple-900/50 rounded-full text-purple-300 border border-purple-600/30">
+              🏆 Desafio Extremo
+            </span>
+          </div>
+        </div>
 
         {/* Footer */}
-        <p className="text-slate-500 text-sm">
-          A Jump King-inspired environmental tale
+        <p className="text-emerald-300/60 text-sm font-medium">
+          Uma aventura ambiental inspirada em Jump King
         </p>
       </div>
     </div>
