@@ -434,15 +434,9 @@ class GameEngine {
     // Add floating pollution particles
     this.drawPollutionParticles();
 
-    // Draw platforms
-    this.ctx.fillStyle = '#6b7280'; // gray-500
+    // Draw platforms with waste textures
     for (const platform of this.platforms) {
-      this.ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
-      
-      // Add platform border
-      this.ctx.strokeStyle = '#9ca3af'; // gray-400
-      this.ctx.lineWidth = 2;
-      this.ctx.strokeRect(platform.x, platform.y, platform.width, platform.height);
+      this.drawPlatform(platform);
     }
 
     // Draw recycling symbol (goal)
