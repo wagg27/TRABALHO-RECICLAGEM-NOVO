@@ -546,23 +546,123 @@ class GameEngine {
     this.ctx.stroke();
   }
 
+  // New methods for enhanced visuals
+  generatePollutionParticles() {
+    const particles = [];
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x: Math.random() * this.worldWidth,
+        y: Math.random() * this.worldHeight,
+        size: Math.random() * 3 + 1,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: Math.random() * 0.3 + 0.1,
+        opacity: Math.random() * 0.5 + 0.2,
+        color: Math.random() > 0.5 ? '#78716c' : '#a8a29e' // stone colors
+      });
+    }
+    return particles;
+  }
+
+  drawPollutionParticles() {
+    for (const particle of this.pollutionParticles) {
+      this.ctx.globalAlpha = particle.opacity;
+      this.ctx.fillStyle = particle.color;
+      this.ctx.beginPath();
+      this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      this.ctx.fill();
+      
+      // Update particle position
+      particle.x += particle.speedX;
+      particle.y += particle.speedY;
+      
+      // Wrap around screen
+      if (particle.y > this.worldHeight) particle.y = 0;
+      if (particle.x > this.worldWidth) particle.x = 0;
+      if (particle.x < 0) particle.x = this.worldWidth;
+    }
+    this.ctx.globalAlpha = 1;
+  }
+
+  drawPlatform(platform) {
+    // Platform base with waste texture
+    const gradient = this.ctx.createLinearGradient(platform.x, platform.y, platform.x, platform.y + platform.height);
+    gradient.addColorStop(0, '#6b7280'); // gray-500
+    gradient.addColorStop(0.5, '#4b5563'); // gray-600  
+    gradient.addColorStop(1, '#374151'); // gray-700
+    
+    this.ctx.fillStyle = gradient;
+    this.ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+    
+    // Add waste items on platform
+    this.ctx.strokeStyle = '#9ca3af'; // gray-400
+    this.ctx.lineWidth = 2;
+    this.ctx.strokeRect(platform.x, platform.y, platform.width, platform.height);
+    
+    // Add some trash details
+    this.ctx.fillStyle = '#ef4444'; // red-500 (plastic waste)
+    for (let i = 0; i < 3; i++) {
+      const x = platform.x + (i + 1) * (platform.width / 4);
+      const y = platform.y - 2;
+      this.ctx.fillRect(x - 2, y, 4, 2);
+    }
+    
+    // Add bottles and cans
+    this.ctx.fillStyle = '#06b6d4'; // cyan-500 (bottles)
+    const bottleX = platform.x + platform.width * 0.7;
+    this.ctx.fillRect(bottleX - 1, platform.y - 6, 2, 6);
+    
+    // Add shine effect on platform edge
+    this.ctx.strokeStyle = '#d1d5db'; // gray-300
+    this.ctx.lineWidth = 1;
+    this.ctx.beginPath();
+    this.ctx.moveTo(platform.x, platform.y);
+    this.ctx.lineTo(platform.x + platform.width, platform.y);
+    this.ctx.stroke();
+  }
+
   drawUI() {
-    // Draw height indicator on the right
-    this.ctx.fillStyle = '#1f2937';
-    this.ctx.fillRect(this.canvas.width - 100, 20, 80, 200);
-    this.ctx.strokeStyle = '#6b7280';
-    this.ctx.strokeRect(this.canvas.width - 100, 20, 80, 200);
+    // Enhanced height indicator with Brazilian Portuguese
+    const uiX = this.canvas.width - 120;
+    const uiY = 20;
+    const uiWidth = 100;
+    const uiHeight = 220;
     
-    // Height progress (adjusted for new tower height)
-    const progress = Math.min(this.currentHeight / 500, 1); // 500m is new max height
+    // Background with gradient
+    const gradient = this.ctx.createLinearGradient(uiX, uiY, uiX, uiY + uiHeight);
+    gradient.addColorStop(0, 'rgba(15, 23, 42, 0.9)'); // slate-900
+    gradient.addColorStop(1, 'rgba(30, 41, 59, 0.9)'); // slate-800
+    
+    this.ctx.fillStyle = gradient;
+    this.ctx.fillRect(uiX, uiY, uiWidth, uiHeight);
+    
+    // Border with emerald glow
+    this.ctx.strokeStyle = '#10b981';
+    this.ctx.lineWidth = 2;
+    this.ctx.strokeRect(uiX, uiY, uiWidth, uiHeight);
+    
+    // Height progress bar
+    const progress = Math.min(this.currentHeight / 500, 1);
+    const barHeight = (uiHeight - 40) * progress;
+    
+    // Progress gradient
+    const progressGradient = this.ctx.createLinearGradient(0, uiY + uiHeight - 20, 0, uiY + 20);
+    progressGradient.addColorStop(0, '#ef4444'); // red-500 (bottom - dangerous)
+    progressGradient.addColorStop(0.5, '#eab308'); // yellow-500 (middle)
+    progressGradient.addColorStop(1, '#10b981'); // emerald-500 (top - clean)
+    
+    this.ctx.fillStyle = progressGradient;
+    this.ctx.fillRect(uiX + 10, uiY + uiHeight - 20 - barHeight, uiWidth - 20, barHeight);
+    
+    // Height text with better styling
     this.ctx.fillStyle = '#10b981';
-    this.ctx.fillRect(this.canvas.width - 90, 210 - (progress * 180), 60, progress * 180);
-    
-    // Height text
-    this.ctx.fillStyle = '#e5e7eb';
-    this.ctx.font = '12px monospace';
+    this.ctx.font = 'bold 14px Arial';
     this.ctx.textAlign = 'center';
-    this.ctx.fillText(`${this.currentHeight}m`, this.canvas.width - 60, 240);
+    this.ctx.fillText(`${this.currentHeight}m`, uiX + uiWidth/2, uiY + uiHeight + 15);
+    
+    // Label
+    this.ctx.fillStyle = '#94a3b8'; // slate-400
+    this.ctx.font = '10px Arial';
+    this.ctx.fillText('ALTITUDE', uiX + uiWidth/2, uiY + uiHeight + 30);
   }
 
   start() {
