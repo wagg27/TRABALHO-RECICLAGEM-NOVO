@@ -217,33 +217,40 @@ class GameEngine {
   }
 
   releaseJump() {
-    if (this.player.charging && this.player.onGround) {
-      const jumpPower = Math.max(8, (this.player.chargeLevel / this.player.maxChargeLevel) * this.maxJumpPower);
+    // Always try to jump when button is released, even with minimal charge
+    if (this.player.charging) {
+      // Minimum jump power even if barely charged
+      const minJumpPower = 12;
+      const jumpPower = Math.max(minJumpPower, (this.player.chargeLevel / this.player.maxChargeLevel) * this.maxJumpPower);
       
-      // More predictable jump angle with slight horizontal bias based on movement
-      let baseAngle = -Math.PI/2; // Straight up
+      // More predictable jump angle with horizontal bias
       let horizontalBias = 0;
       
-      // Add horizontal component if moving
+      // Add horizontal component based on movement direction
       if (this.player.movingLeft) {
-        horizontalBias = -0.3;
+        horizontalBias = -0.4;
       } else if (this.player.movingRight) {
-        horizontalBias = 0.3;
+        horizontalBias = 0.4;
       }
       
-      const angle = baseAngle + horizontalBias + (Math.random() * 0.2 - 0.1); // Less randomness
+      const baseAngle = -Math.PI/2; // Straight up
+      const angle = baseAngle + horizontalBias;
       
-      // Preserve current horizontal momentum and add jump velocity
-      const jumpVelX = Math.cos(angle) * jumpPower * 0.6;
+      // Calculate jump velocities
+      const jumpVelX = Math.cos(angle) * jumpPower * 0.8;
       const jumpVelY = Math.sin(angle) * jumpPower;
       
-      // Combine with existing horizontal velocity
-      this.player.velocityX = (this.player.velocityX * 0.5) + jumpVelX;
+      // Apply jump immediately
+      this.player.velocityX = (this.player.velocityX * 0.3) + jumpVelX;
       this.player.velocityY = jumpVelY;
       
+      // Reset jump state
       this.player.charging = false;
       this.player.chargeLevel = 0;
       this.player.onGround = false;
+      
+      // Add slight screen shake effect for feedback
+      this.screenShake = 5;
     }
   }
 
