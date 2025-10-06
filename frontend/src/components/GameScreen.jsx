@@ -367,19 +367,33 @@ const GameScreen = () => {
         {gameState.gameWon && (
           <div className="absolute inset-0 bg-black/80 flex items-center justify-center p-4">
             <div className="bg-slate-800 rounded-xl p-6 border border-emerald-500 text-center max-w-md w-full">
-              <h2 className="text-4xl font-bold text-emerald-400 mb-4">Vitória!</h2>
-              <p className="text-slate-300 mb-4">
-                Você alcançou o símbolo da reciclagem! A sacola plástica encontrou sua redenção.
-              </p>
+              <div className="text-center mb-6">
+                <div className="text-6xl mb-3">🎉</div>
+                <h2 className="text-4xl font-black text-emerald-400 mb-2">VITÓRIA!</h2>
+                <p className="text-slate-200 mb-4 leading-relaxed">
+                  🌿 Parabéns! Você alcançou o símbolo da reciclagem! 
+                  A sacola plástica encontrou sua redenção ambiental! ♻️
+                </p>
+              </div>
               
-              <div className="bg-slate-700 rounded-lg p-4 mb-6">
-                <h3 className="text-xl font-bold text-slate-200 mb-2">Seus Resultados</h3>
-                <p className="text-emerald-400">Altura: {gameState.height}m</p>
-                {gameStartTime && (
-                  <p className="text-blue-400">
-                    Tempo: {Math.floor((Date.now() - gameStartTime) / 1000)}s
-                  </p>
-                )}
+              <div className="bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-xl p-5 mb-6 border border-emerald-500/30">
+                <h3 className="text-xl font-bold text-emerald-300 mb-3 flex items-center gap-2">
+                  📊 Seus Resultados
+                </h3>
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div className="bg-slate-800/50 rounded-lg p-3 border border-emerald-600/30">
+                    <div className="text-emerald-400 font-bold text-2xl">{gameState.height}m</div>
+                    <div className="text-slate-300 text-sm">Altura Final</div>
+                  </div>
+                  {gameStartTime && (
+                    <div className="bg-slate-800/50 rounded-lg p-3 border border-blue-600/30">
+                      <div className="text-blue-400 font-bold text-2xl">
+                        {Math.floor((Date.now() - gameStartTime) / 1000)}s
+                      </div>
+                      <div className="text-slate-300 text-sm">Tempo Total</div>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {showLeaderboard && leaderboard.length > 0 && (
