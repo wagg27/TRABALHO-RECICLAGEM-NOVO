@@ -336,11 +336,28 @@ const GameScreen = () => {
         </div>
 
         {/* Desktop Instructions */}
-        <div className="absolute top-4 left-4 bg-slate-800/90 rounded-lg px-3 py-2 border border-slate-600 hidden md:block">
-          <div className="text-slate-300 text-sm space-y-1">
-            <p>Movimento: <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">A</kbd> <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">D</kbd> ou Setas</p>
-            <p>Pulo: <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">ESPAÇO</kbd> ou <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">W</kbd></p>
-            <p>Descer: <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">S</kbd> (no ar)</p>
+        <div className="absolute top-4 left-4 bg-gradient-to-br from-slate-800/95 to-slate-900/95 rounded-xl px-4 py-3 border border-emerald-500/30 shadow-xl backdrop-blur-sm hidden md:block">
+          <h3 className="text-emerald-300 font-semibold text-sm mb-2 flex items-center gap-1">
+            🎮 Controles
+          </h3>
+          <div className="text-slate-300 text-sm space-y-2">
+            <div className="flex items-center gap-2">
+              <span className="text-cyan-400">🏃‍♂️</span>
+              <span>Movimento:</span>
+              <kbd className="bg-emerald-700/50 px-2 py-1 rounded border border-emerald-600/50 text-xs">A</kbd>
+              <kbd className="bg-emerald-700/50 px-2 py-1 rounded border border-emerald-600/50 text-xs">D</kbd>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-yellow-400">🚀</span>
+              <span>Pulo:</span>
+              <kbd className="bg-amber-700/50 px-2 py-1 rounded border border-amber-600/50 text-xs">ESPAÇO</kbd>
+              <kbd className="bg-amber-700/50 px-2 py-1 rounded border border-amber-600/50 text-xs">W</kbd>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-red-400">⬇️</span>
+              <span>Descer:</span>
+              <kbd className="bg-red-700/50 px-2 py-1 rounded border border-red-600/50 text-xs">S</kbd>
+            </div>
           </div>
         </div>
 
