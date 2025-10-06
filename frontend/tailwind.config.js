@@ -70,11 +70,29 @@ module.exports = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'spin-slow': {
+  				from: {
+  					transform: 'rotate(0deg)'
+  				},
+  				to: {
+  					transform: 'rotate(360deg)'
+  				}
+  			},
+  			'float': {
+  				'0%, 100%': {
+  					transform: 'translateY(0px)'
+  				},
+  				'50%': {
+  					transform: 'translateY(-10px)'
+  				}
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'spin-slow': 'spin-slow 3s linear infinite',
+  			'float': 'float 3s ease-in-out infinite'
   		}
   	}
   },
