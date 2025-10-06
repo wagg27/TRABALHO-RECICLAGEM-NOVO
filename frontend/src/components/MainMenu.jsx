@@ -39,26 +39,32 @@ const MainMenu = () => {
         </div>
 
         {/* Game Description */}
-        <Card className="bg-slate-800/50 border-slate-600 p-6 backdrop-blur-sm">
-          <div className="space-y-4">
-            <h2 className="text-2xl font-semibold text-slate-200">The Journey</h2>
-            <p className="text-slate-400 leading-relaxed">
-              You are a plastic bag drifting through a world of waste and pollution. 
-              Your only chance for redemption lies at the top of the towering landfill, 
-              where the sacred recycling symbol awaits.
+        <Card className="bg-slate-800/30 border border-emerald-500/30 p-6 backdrop-blur-xl shadow-2xl">
+          <div className="space-y-5">
+            <h2 className="text-2xl font-bold text-emerald-200 flex items-center gap-2">
+              <LeafIcon className="w-6 h-6 text-green-400" />
+              A Jornada Ecológica
+            </h2>
+            <p className="text-slate-300 leading-relaxed text-left">
+              Você é uma sacola plástica flutuando através de um mundo de lixo e poluição. 
+              Sua única chance de redenção está no topo da torre de lixo, 
+              onde o símbolo sagrado da reciclagem aguarda por você.
             </p>
-            <div className="space-y-2">
-              <h3 className="text-lg font-medium text-slate-300">Controls:</h3>
-              <p className="text-slate-400">
-                <strong>Desktop:</strong> Hold SPACE to charge jump, release to leap
-              </p>
-              <p className="text-slate-400">
-                <strong>Mobile:</strong> Hold the jump button to charge, release to jump
-              </p>
+            <div className="space-y-3">
+              <h3 className="text-lg font-semibold text-emerald-300">Controles:</h3>
+              <div className="grid gap-2 text-sm">
+                <p className="text-slate-300">
+                  <strong className="text-emerald-400">Desktop:</strong> WASD ou setas para mover, ESPAÇO/W para pular
+                </p>
+                <p className="text-slate-300">
+                  <strong className="text-emerald-400">Mobile:</strong> Botões virtuais - segure para carregar o pulo
+                </p>
+              </div>
             </div>
-            <div className="bg-amber-900/30 border border-amber-600/50 rounded-lg p-3">
-              <p className="text-amber-300 text-sm">
-                ⚠️ Warning: There are no checkpoints. One wrong jump could send you tumbling down!
+            <div className="bg-gradient-to-r from-amber-900/40 to-red-900/40 border border-amber-500/50 rounded-lg p-4">
+              <p className="text-amber-200 text-sm flex items-center gap-2">
+                <span className="text-xl">⚠️</span>
+                <span><strong>Atenção:</strong> Não há pontos de salvamento! Um pulo errado pode te enviar de volta ao início!</span>
               </p>
             </div>
           </div>
