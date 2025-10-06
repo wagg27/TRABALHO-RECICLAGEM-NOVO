@@ -165,13 +165,16 @@ const GameScreen = () => {
 
         {/* Jump Charge Indicator */}
         {gameState.isCharging && (
-          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-slate-800/90 rounded-lg px-4 py-2 border border-slate-600">
-            <div className="text-slate-300 text-sm mb-1">Jump Power</div>
-            <div className="w-48 h-3 bg-slate-700 rounded-full overflow-hidden">
+          <div className="absolute bottom-28 left-1/2 transform -translate-x-1/2 bg-gradient-to-br from-slate-800/95 to-slate-900/95 rounded-xl px-6 py-3 border-2 border-emerald-500/50 shadow-2xl backdrop-blur-sm">
+            <div className="text-emerald-300 text-sm font-semibold mb-2 text-center">💪 Força do Pulo</div>
+            <div className="w-56 h-4 bg-slate-700/80 rounded-full overflow-hidden border border-slate-600/50 shadow-inner">
               <div
-                className="h-full bg-gradient-to-r from-emerald-500 to-amber-500 transition-all duration-75"
+                className="h-full bg-gradient-to-r from-emerald-400 via-yellow-400 to-red-500 transition-all duration-75 shadow-lg"
                 style={{ width: `${(gameState.chargeLevel / 100) * 100}%` }}
               />
+            </div>
+            <div className="text-xs text-slate-400 text-center mt-1">
+              {Math.round((gameState.chargeLevel / 100) * 100)}% carregado
             </div>
           </div>
         )}
