@@ -510,40 +510,86 @@ class GameEngine {
   drawPlayer() {
     const player = this.player;
     
-    // Draw plastic bag with floating animation
-    const floatOffset = Math.sin(Date.now() * 0.005) * 2;
+    // Enhanced floating animation with multiple sine waves
+    const time = Date.now() * 0.005;
+    const floatOffset = Math.sin(time) * 3 + Math.sin(time * 1.5) * 1;
     
-    // Bag body (main shape)
-    this.ctx.fillStyle = this.player.charging ? '#fbbf24' : '#e5e7eb'; // amber or gray
-    this.ctx.strokeStyle = '#6b7280';
+    // Add subtle rotation based on movement
+    const rotationAngle = this.player.velocityX * 0.05;
+    
+    this.ctx.save();
+    this.ctx.translate(player.x + player.width/2, player.y + player.height/2 + floatOffset);
+    this.ctx.rotate(rotationAngle);
+    
+    // Draw shadow
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    this.ctx.beginPath();
+    this.ctx.ellipse(0, player.height/2 + 5, player.width/2 + 2, 4, 0, 0, Math.PI * 2);
+    this.ctx.fill();
+    
+    // Bag body with gradient and glow effect
+    const bagGradient = this.ctx.createRadialGradient(0, -5, 0, 0, -5, 25);
+    if (this.player.charging) {
+      // Glowing effect when charging
+      bagGradient.addColorStop(0, '#fcd34d'); // yellow-300
+      bagGradient.addColorStop(0.7, '#f59e0b'); // amber-500
+      bagGradient.addColorStop(1, '#d97706'); // amber-600
+      
+      // Add glow
+      this.ctx.shadowColor = '#fbbf24';
+      this.ctx.shadowBlur = 15;
+    } else {
+      bagGradient.addColorStop(0, '#f3f4f6'); // gray-100
+      bagGradient.addColorStop(0.7, '#d1d5db'); // gray-300
+      bagGradient.addColorStop(1, '#9ca3af'); // gray-400
+    }
+    
+    this.ctx.fillStyle = bagGradient;
+    this.ctx.strokeStyle = this.player.charging ? '#92400e' : '#6b7280';
     this.ctx.lineWidth = 2;
     
-    // Draw bag shape (slightly wavy)
+    // Draw enhanced bag shape with curves
     this.ctx.beginPath();
-    this.ctx.moveTo(player.x + 8, player.y + floatOffset);
-    this.ctx.lineTo(player.x + 24, player.y + floatOffset);
-    this.ctx.lineTo(player.x + 28, player.y + 8 + floatOffset);
-    this.ctx.lineTo(player.x + 26, player.y + 35 + floatOffset);
-    this.ctx.lineTo(player.x + 6, player.y + 35 + floatOffset);
-    this.ctx.lineTo(player.x + 4, player.y + 8 + floatOffset);
+    this.ctx.moveTo(-8, -player.height/2 + 8);
+    this.ctx.quadraticCurveTo(8, -player.height/2, 8, -player.height/2 + 8);
+    this.ctx.quadraticCurveTo(12, 0, 10, player.height/2 - 5);
+    this.ctx.quadraticCurveTo(0, player.height/2 + 2, -10, player.height/2 - 5);
+    this.ctx.quadraticCurveTo(-12, 0, -8, -player.height/2 + 8);
     this.ctx.closePath();
     this.ctx.fill();
     this.ctx.stroke();
     
-    // Draw handles
+    // Reset shadow
+    this.ctx.shadowBlur = 0;
+    
+    // Draw handles with better styling
+    this.ctx.strokeStyle = this.player.charging ? '#92400e' : '#4b5563';
+    this.ctx.lineWidth = 3;
+    this.ctx.lineCap = 'round';
+    
+    // Left handle
     this.ctx.beginPath();
-    this.ctx.moveTo(player.x + 10, player.y + floatOffset);
-    this.ctx.lineTo(player.x + 10, player.y - 5 + floatOffset);
-    this.ctx.lineTo(player.x + 14, player.y - 5 + floatOffset);
-    this.ctx.lineTo(player.x + 14, player.y + floatOffset);
+    this.ctx.moveTo(-6, -player.height/2 + 8);
+    this.ctx.quadraticCurveTo(-6, -player.height/2 - 3, -2, -player.height/2 - 3);
+    this.ctx.quadraticCurveTo(2, -player.height/2 - 3, 2, -player.height/2 + 8);
     this.ctx.stroke();
     
+    // Right handle  
     this.ctx.beginPath();
-    this.ctx.moveTo(player.x + 18, player.y + floatOffset);
-    this.ctx.lineTo(player.x + 18, player.y - 5 + floatOffset);
-    this.ctx.lineTo(player.x + 22, player.y - 5 + floatOffset);
-    this.ctx.lineTo(player.x + 22, player.y + floatOffset);
+    this.ctx.moveTo(2, -player.height/2 + 8);
+    this.ctx.quadraticCurveTo(2, -player.height/2 - 3, 6, -player.height/2 - 3);
+    this.ctx.quadraticCurveTo(10, -player.height/2 - 3, 10, -player.height/2 + 8);
     this.ctx.stroke();
+    
+    // Add recycling symbol when charging
+    if (this.player.charging) {
+      this.ctx.fillStyle = '#065f46'; // emerald-800
+      this.ctx.font = 'bold 8px Arial';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillText('♻️', 0, 2);
+    }
+    
+    this.ctx.restore();
   }
 
   // New methods for enhanced visuals
