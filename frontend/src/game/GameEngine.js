@@ -405,21 +405,34 @@ class GameEngine {
   }
 
   render() {
-    // Clear canvas
-    this.ctx.fillStyle = '#1e293b'; // slate-800
+    // Clear canvas with deep space blue
+    this.ctx.fillStyle = '#0f172a'; // slate-900
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    // Apply screen shake if active
+    this.ctx.save();
+    if (this.screenShake > 0) {
+      const shakeX = (Math.random() - 0.5) * this.screenShake;
+      const shakeY = (Math.random() - 0.5) * this.screenShake;
+      this.ctx.translate(shakeX, shakeY);
+      this.screenShake *= 0.8; // Decay shake
+    }
 
     // Save context for camera transform
     this.ctx.save();
     this.ctx.translate(-this.camera.x, -this.camera.y);
 
-    // Draw background gradient effect
+    // Draw atmospheric background with pollution layers
     const gradient = this.ctx.createLinearGradient(0, 0, 0, this.worldHeight);
-    gradient.addColorStop(0, '#065f46'); // emerald-800
-    gradient.addColorStop(0.5, '#374151'); // gray-700
-    gradient.addColorStop(1, '#1f2937'); // gray-800
+    gradient.addColorStop(0, '#065f46'); // emerald-800 (clean air at top)
+    gradient.addColorStop(0.3, '#1f2937'); // gray-800 (pollution layer)
+    gradient.addColorStop(0.7, '#451a03'); // amber-900 (heavy pollution)
+    gradient.addColorStop(1, '#1c1917'); // stone-900 (toxic bottom)
     this.ctx.fillStyle = gradient;
     this.ctx.fillRect(0, 0, this.worldWidth, this.worldHeight);
+
+    // Add floating pollution particles
+    this.drawPollutionParticles();
 
     // Draw platforms
     this.ctx.fillStyle = '#6b7280'; // gray-500
