@@ -460,31 +460,43 @@ class GameEngine {
 
   drawRecyclingSymbol() {
     const symbol = this.recyclingSymbol;
-    
-    // Draw glowing effect
-    this.ctx.shadowColor = '#10b981'; // emerald-500
-    this.ctx.shadowBlur = 20;
-    
-    // Draw recycling symbol as three curved arrows in a triangle
-    this.ctx.strokeStyle = '#10b981'; // emerald-500
-    this.ctx.lineWidth = 4;
-    this.ctx.lineCap = 'round';
-    
     const centerX = symbol.x + symbol.width / 2;
     const centerY = symbol.y + symbol.height / 2;
-    const radius = 24;
     
-    // Draw three arrows
+    // Animated pulsing glow
+    const pulse = Math.sin(Date.now() * 0.01) * 0.3 + 0.7;
+    
+    // Multiple glow layers for dramatic effect
+    this.ctx.shadowColor = '#10b981';
+    this.ctx.shadowBlur = 30 * pulse;
+    
+    // Outer glow ring
+    this.ctx.strokeStyle = `rgba(16, 185, 129, ${0.3 * pulse})`;
+    this.ctx.lineWidth = 8;
+    this.ctx.beginPath();
+    this.ctx.arc(centerX, centerY, 35, 0, Math.PI * 2);
+    this.ctx.stroke();
+    
+    // Main symbol with enhanced visuals
+    this.ctx.strokeStyle = '#10b981';
+    this.ctx.lineWidth = 5;
+    this.ctx.lineCap = 'round';
+    this.ctx.lineJoin = 'round';
+    
+    const radius = 20;
+    
+    // Draw three arrows with smooth curves
     for (let i = 0; i < 3; i++) {
-      const angle = (i * 2 * Math.PI) / 3;
-      const startAngle = angle - Math.PI / 6;
-      const endAngle = angle + Math.PI / 6;
+      const angle = (i * 2 * Math.PI) / 3 + (Date.now() * 0.002); // Slow rotation
+      const startAngle = angle - Math.PI / 4;
+      const endAngle = angle + Math.PI / 4;
       
+      // Arrow arc
       this.ctx.beginPath();
       this.ctx.arc(centerX, centerY, radius, startAngle, endAngle);
       this.ctx.stroke();
       
-      // Arrow head
+      // Enhanced arrow head
       const headX = centerX + Math.cos(endAngle) * radius;
       const headY = centerY + Math.sin(endAngle) * radius;
       const headAngle = endAngle + Math.PI / 2;
@@ -492,19 +504,38 @@ class GameEngine {
       this.ctx.beginPath();
       this.ctx.moveTo(headX, headY);
       this.ctx.lineTo(
-        headX + Math.cos(headAngle + 0.5) * 8,
-        headY + Math.sin(headAngle + 0.5) * 8
+        headX + Math.cos(headAngle + 0.6) * 10,
+        headY + Math.sin(headAngle + 0.6) * 10
       );
-      this.ctx.moveTo(headX, headY);
       this.ctx.lineTo(
-        headX + Math.cos(headAngle - 0.5) * 8,
-        headY + Math.sin(headAngle - 0.5) * 8
+        headX + Math.cos(headAngle) * 6,
+        headY + Math.sin(headAngle) * 6
       );
-      this.ctx.stroke();
+      this.ctx.lineTo(
+        headX + Math.cos(headAngle - 0.6) * 10,
+        headY + Math.sin(headAngle - 0.6) * 10
+      );
+      this.ctx.lineTo(headX, headY);
+      this.ctx.fill();
     }
     
-    // Reset shadow
+    // Center highlight
+    this.ctx.fillStyle = '#34d399'; // emerald-400
+    this.ctx.beginPath();
+    this.ctx.arc(centerX, centerY, 4, 0, Math.PI * 2);
+    this.ctx.fill();
+    
+    // Reset effects
     this.ctx.shadowBlur = 0;
+    
+    // Add floating text
+    this.ctx.fillStyle = '#10b981';
+    this.ctx.font = 'bold 12px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('META', centerX, centerY - 45);
+    this.ctx.font = '10px Arial';
+    this.ctx.fillStyle = '#6ee7b7'; // emerald-300
+    this.ctx.fillText('RECICLAGEM', centerX, centerY + 55);
   }
 
   drawPlayer() {
