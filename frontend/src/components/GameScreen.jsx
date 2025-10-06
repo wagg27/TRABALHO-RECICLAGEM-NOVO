@@ -331,8 +331,10 @@ const GameScreen = () => {
         </div>
 
         {/* Mobile Instructions */}
-        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 md:hidden">
-          <p className="text-slate-400 text-xs text-center">Segure os botões para mover e carregar o pulo</p>
+        <div className="absolute bottom-28 left-1/2 transform -translate-x-1/2 md:hidden bg-slate-800/90 rounded-lg px-3 py-2 border border-emerald-500/30">
+          <p className="text-emerald-300 text-xs text-center font-medium">
+            📱 Segure os botões para mover e carregar o pulo
+          </p>
         </div>
 
         {/* Desktop Instructions */}
