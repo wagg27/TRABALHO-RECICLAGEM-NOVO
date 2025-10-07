@@ -260,7 +260,6 @@ const GameScreen = () => {
               }}
               onMouseUp={(e) => {
                 e.preventDefault();
-                console.log('Mouse up right');
                 if (gameEngineRef.current) {
                   gameEngineRef.current.stopMoveRight();
                 }
