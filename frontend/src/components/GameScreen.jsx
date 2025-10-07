@@ -282,7 +282,6 @@ const GameScreen = () => {
               onTouchStart={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Touch start jump');
                 if (gameEngineRef.current) {
                   gameEngineRef.current.startJump();
                 }
