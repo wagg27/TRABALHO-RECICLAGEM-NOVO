@@ -242,7 +242,6 @@ const GameScreen = () => {
               onTouchEnd={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Touch end right');
                 if (gameEngineRef.current) {
                   gameEngineRef.current.stopMoveRight();
                 }
