@@ -235,7 +235,6 @@ const GameScreen = () => {
               onTouchStart={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Touch start right');
                 if (gameEngineRef.current) {
                   gameEngineRef.current.startMoveRight();
                 }
