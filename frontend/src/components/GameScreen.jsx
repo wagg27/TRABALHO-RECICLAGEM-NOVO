@@ -322,12 +322,6 @@ const GameScreen = () => {
           </div>
         </div>
 
-        {/* Mobile Instructions */}
-        <div className="absolute bottom-28 left-1/2 transform -translate-x-1/2 md:hidden bg-slate-800/90 rounded-lg px-3 py-2 border border-emerald-500/30">
-          <p className="text-emerald-300 text-xs text-center font-medium">
-          </p>
-        </div>
-
         {/* Desktop Instructions */}
         <div className="absolute top-4 left-4 bg-gradient-to-br from-slate-800/95 to-slate-900/95 rounded-xl px-4 py-3 border border-emerald-500/30 shadow-xl backdrop-blur-sm hidden md:block">
           <h3 className="text-emerald-300 font-semibold text-sm mb-2 flex items-center gap-1">
