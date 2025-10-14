@@ -37,7 +37,7 @@ class GameEngine {
     
     // Camera
     this.camera = { x: 0, y: 0 };
-    this.cameras.main.setBounds(0, 0, larguraDoMundo, alturaDoMundo)
+    this.cameras.main.setBounds(20, 20, larguraDoMundo, alturaDoMundo)
     
     // World properties
     this.worldWidth = 1000;
