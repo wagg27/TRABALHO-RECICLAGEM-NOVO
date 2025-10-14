@@ -1,4 +1,4 @@
-class GameEngine {
+fclass GameEngine {
   constructor(canvas, setGameState, onGameEnd = null) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
@@ -339,12 +339,18 @@ class GameEngine {
     }
 
     // Update camera
-    this.updateCamera(); {
-      const focusY = this.canvas.height * 0.8;
-      this.cameraY = -(this.player.y - focusY); 
-      if (this.cameraY > 0); {
+    this.updateCamera() {
+    // Foco vertical em 80% da tela (mais baixo) para mostrar mais plataformas acima.
+    const focusY = this.canvas.height * 0.8; 
+
+    // Calcula o deslocamento vertical
+    this.cameraY = -(this.player.y - focusY); 
+
+    // Limita a câmera para não descer abaixo do ponto inicial (0)
+    if (this.cameraY > 0) {
         this.cameraY = 0;
-      }
+    }
+}
       
 
     // Update height stats (adjusted for new world height)
