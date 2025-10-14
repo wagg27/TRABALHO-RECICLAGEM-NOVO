@@ -30,7 +30,6 @@ const MainMenu = () => {
               </h1>
               <h2 className="text-2xl md:text-3xl font-bold text-emerald-200/80">
                 Plástica
-                Turma: 309
               </h2>
             </div>
           </div>
