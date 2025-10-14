@@ -96,7 +96,7 @@ const MainMenu = () => {
 
         {/* Footer */}
         <p className="text-emerald-300/60 text-sm font-medium">
-          Uma aventura ambiental inspirada em Jump King
+          Uma aventura ambiental feita pela Turma 309
         </p>
       </div>
     </div>
