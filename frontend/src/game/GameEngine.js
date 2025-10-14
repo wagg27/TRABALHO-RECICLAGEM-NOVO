@@ -28,7 +28,7 @@ class GameEngine {
     // Physics constants
     this.gravity = 0.8;
     this.jumpPowerMultiplier = 0.3;
-    this.maxJumpPower = 25;
+    this.maxJumpPower = 40;
     this.chargeSpeed = 3;
     this.moveSpeed = 6;
     this.airMoveSpeed = 4;
