@@ -1,4 +1,4 @@
-fclass GameEngine {
+class GameEngine {
   constructor(canvas, setGameState, onGameEnd = null) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
