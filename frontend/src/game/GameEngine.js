@@ -339,7 +339,13 @@ class GameEngine {
     }
 
     // Update camera
-    this.updateCamera();
+    this.updateCamera() {
+      const focusY = this.canvas.height * 0.8;
+      this.cameraY = -(this.player.y - focusY); 
+      if (this.cameraY > 0) {
+        this.cameraY = 0;
+      }
+      
 
     // Update height stats (adjusted for new world height)
     this.currentHeight = Math.max(0, Math.floor((this.worldHeight - this.player.y) / 15));
