@@ -21,8 +21,8 @@ const MainMenu = () => {
         <div className="space-y-6">
           <div className="flex items-center justify-center gap-4">
             <div className="relative">
-              <RecycleIcon className="w-20 h-20 text-emerald-400 animate-spin-slow" />
-              <LeafIcon className="w-8 h-8 text-green-400 absolute -top-2 -right-2 animate-bounce" />
+              <RecycleIcon className="w-20 h-20 text-emerald-400" />
+              <LeafIcon className="w-6 h-8 text-green-400 absolute -top-2 -right-2" />
             </div>
             <div>
               <h1 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-emerald-300 via-teal-300 to-cyan-300 bg-clip-text text-transparent drop-shadow-2xl">
@@ -30,6 +30,7 @@ const MainMenu = () => {
               </h1>
               <h2 className="text-2xl md:text-3xl font-bold text-emerald-200/80">
                 Plástica
+                Turma: 309
               </h2>
             </div>
           </div>
