@@ -339,7 +339,7 @@ class GameEngine {
     }
 
     // Update camera
-    this.updateCamera() {
+    updateCamera() {
     // Foco vertical em 80% da tela (mais baixo) para mostrar mais plataformas acima.
     const focusY = this.canvas.height * 0.8; 
 
