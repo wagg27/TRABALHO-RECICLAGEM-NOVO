@@ -50,7 +50,7 @@ const GameScreen = () => {
         gameEngineRef.current.destroy();
       }
     };
-  }, [setGameState, handleGameEnd, playerName, setSessionId, setGameStartTime]);
+  }, []);
 
   // Handle game completion
   const handleGameEnd = async (height, completed) => {
