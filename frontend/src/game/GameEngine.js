@@ -338,7 +338,7 @@ class GameEngine {
     }
 
     // Update camera
-    this.updatecamera() //
+    this.updatecamera(); //
 
     // Update height stats (adjusted for new world height)
     this.currentHeight = Math.max(0, Math.floor((this.worldHeight - this.player.y) / 15));
