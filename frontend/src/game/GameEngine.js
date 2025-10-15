@@ -1,6 +1,8 @@
 class GameEngine {    
-      constructor(canvas, setState, onGameEnd) { // <--- Defina o constructor
-    // Propriedades do construtor
+            updateCamera(){
+}
+
+      constructor(canvas, setState, onGameEnd) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.setState = setState;
@@ -24,7 +26,7 @@ class GameEngine {
       movingLeft: false,
       movingRight: false
     };
-    
+
     // Physics constants
     this.gravity = 0.8;
     this.jumpPowerMultiplier = 0.3;
@@ -74,7 +76,7 @@ class GameEngine {
     // Initialize particle system
     this.pollutionParticles = this.generatePollutionParticles();
   }
-
+      
   generatePlatforms() {
     const platforms = [];
     const platformWidth = 120;
