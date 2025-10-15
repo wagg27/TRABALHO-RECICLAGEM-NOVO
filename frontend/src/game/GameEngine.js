@@ -1,4 +1,10 @@
 class GameEngine {    
+      constructor(canvas, setState, onGameEnd) { // <--- Defina o constructor
+    // Propriedades do construtor
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.setState = setState;
+    this.onGameEnd = onGameEnd;
     // Game state
     this.running = false;
     this.animationId = null;
