@@ -1,7 +1,4 @@
-class GameEngine {    
-            updateCamera(){
-            }
-            
+class GameEngine {
       constructor(canvas, setState, onGameEnd) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
