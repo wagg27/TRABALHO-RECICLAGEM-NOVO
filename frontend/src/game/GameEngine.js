@@ -366,7 +366,7 @@ updateCamera() {
     }
 
     // Update game state
-    this.setGameState({
+    this.setState({
       height: this.currentHeight,
       maxHeight: this.maxHeightReached,
       isCharging: this.player.charging,
