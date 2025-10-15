@@ -29,6 +29,9 @@ const GameScreen = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    gameEngineRef.current = new GameEngine(canvas, setGameState, handleGameEnd);
+    gameEngineRef.current.start();
+    
     // Start game session
     const initSession = async () => {
       try {
@@ -41,15 +44,13 @@ const GameScreen = () => {
     };
 
     initSession();
-    gameEngineRef.current = new GameEngine(canvas, setGameState, handleGameEnd);
-    gameEngineRef.current.start();
-
+    
     return () => {
       if (gameEngineRef.current) {
         gameEngineRef.current.destroy();
       }
     };
-  }, []);
+  }, [setGameState, handleGameEnd, playerName, setSessionId, setGameStartTime]);
 
   // Handle game completion
   const handleGameEnd = async (height, completed) => {
