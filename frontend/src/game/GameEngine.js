@@ -1,19 +1,5 @@
 class GameEngine {
-
-updateCamera() {
-    // Foco vertical em 80% da tela para mobile
-    const focusY = this.canvas.height * 0.8; 
-
-    // Calcula o deslocamento vertical
-    this.cameraY = -(this.player.y - focusY); 
-
-    // Limita a câmera para não descer abaixo do ponto inicial
-    if (this.cameraY > 0) {
-        this.cameraY = 0;
-    }
-}
-      
-      constructor(canvas, setState, onGameEnd) {
+constructor(canvas, setState, onGameEnd) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.setState = setState;
@@ -296,6 +282,19 @@ updateCamera() {
     this.ctx.imageSmoothingEnabled = false;
   }
 
+updateCamera() {
+    // Foco vertical em 80% da tela para mobile
+    const focusY = this.canvas.height * 0.8; 
+
+    // Calcula o deslocamento vertical
+    this.cameraY = -(this.player.y - focusY); 
+
+    // Limita a câmera para não descer abaixo do ponto inicial
+    if (this.cameraY > 0) {
+        this.cameraY = 0;
+    }
+}
+    
   update() {
     if (!this.running) return;
 
@@ -352,7 +351,7 @@ updateCamera() {
     }
 
     // Update camera
-    this.updateCamera() //
+    this.updateCamera(); //
 
     // Update height stats (adjusted for new world height)
     this.currentHeight = Math.max(0, Math.floor((this.worldHeight - this.player.y) / 15));
