@@ -16,7 +16,19 @@ db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
 app = FastAPI()
+from starlette.middleware.cors import CORSMiddleware # JÁ IMPORTADO NA LINHA 3
 
+# Endereço do seu frontend (Vercel)
+# Este é o domínio que o erro CORS mostrou
+FRONTEND_URL = "https://trabalho-reciclagem-novo.vercel.app" 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[FRONTEND_URL],  # Permite APENAS o seu frontend
+    allow_credentials=True,
+    allow_methods=["*"],           # Permite todos os métodos (GET, POST, etc.)
+    allow_headers=["*"],           # Permite todos os cabeçalhos
+)
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
