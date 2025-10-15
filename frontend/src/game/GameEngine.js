@@ -1,4 +1,18 @@
 class GameEngine {
+
+updateCamera() {
+    // Foco vertical em 80% da tela para mobile
+    const focusY = this.canvas.height * 0.8; 
+
+    // Calcula o deslocamento vertical
+    this.cameraY = -(this.player.y - focusY); 
+
+    // Limita a câmera para não descer abaixo do ponto inicial
+    if (this.cameraY > 0) {
+        this.cameraY = 0;
+    }
+}
+      
       constructor(canvas, setState, onGameEnd) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
@@ -27,7 +41,7 @@ class GameEngine {
     // Physics constants
     this.gravity = 0.8;
     this.jumpPowerMultiplier = 0.3;
-    this.maxJumpPower = 25;
+    this.maxJumpPower = 40;
     this.chargeSpeed = 3;
     this.moveSpeed = 6;
     this.airMoveSpeed = 4;
@@ -338,7 +352,7 @@ class GameEngine {
     }
 
     // Update camera
-    this.updatecamera(); //
+    this.updateCamera() //
 
     // Update height stats (adjusted for new world height)
     this.currentHeight = Math.max(0, Math.floor((this.worldHeight - this.player.y) / 15));
@@ -414,6 +428,10 @@ class GameEngine {
     this.ctx.fillStyle = '#0f172a'; // slate-900
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+this.ctx.save();
+this.ctx.translate(0, this.cameraY); // ESSENCIAL
+this.ctx.restore();
+        
     // Apply screen shake if active
     this.ctx.save();
     if (this.screenShake > 0) {
